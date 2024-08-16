@@ -11,10 +11,4 @@
     <PackageReference Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer" Version="8.1.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Department\" />
-    <Folder Include="Views\Course\" />
-    <Folder Include="Views\Student\" />
-  </ItemGroup>
-
 </Project>

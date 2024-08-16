@@ -30,6 +30,11 @@ namespace StudentManagement.Controllers
             return View();
         }
 
+      /*  public IActionResult CreateUser(string email, string password, string confirmPassword)
+        {
+            return View();
+        }*/
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
