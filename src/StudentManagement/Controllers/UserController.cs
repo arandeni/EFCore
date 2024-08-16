@@ -1,16 +1,18 @@
-using BookStore.Models;
 using Microsoft.AspNetCore.Mvc;
+using StudentManagement.Models;
 using System.Diagnostics;
 
-namespace BookStore.Controllers
+namespace StudentManagement.Controllers
 {
-    public class HomeController : Controller
+    public class UserController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<UserController> _logger;
+        private readonly StudentManagementContext _studentManagementContext;
 
-        public HomeController(ILogger<HomeController> logger)
+        public UserController(ILogger<UserController> logger, StudentManagementContext context)
         {
             _logger = logger;
+            _studentManagementContext = context;
         }
 
         public IActionResult Index()
@@ -22,6 +24,12 @@ namespace BookStore.Controllers
         {
             return View();
         }
+
+        public IActionResult Create() 
+        {
+            return View();
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

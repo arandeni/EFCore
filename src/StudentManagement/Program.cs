@@ -1,5 +1,6 @@
-using Blogging.Models;
 using Microsoft.EntityFrameworkCore;
+using StudentManagement.Models;
+using System.Reflection.Emit;
 
 namespace BookStore
 {
@@ -8,8 +9,8 @@ namespace BookStore
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            builder.Services.AddDbContext<BloggingContext>(options =>
-                        options.UseSqlServer(builder.Configuration.GetConnectionString("BloggingContext")));
+            builder.Services.AddDbContext<StudentManagementContext>(options =>
+                        options.UseSqlServer(builder.Configuration.GetConnectionString("StudentManagementContext")));
             
             // Add services to the container.
             builder.Services.AddControllersWithViews();
@@ -21,13 +22,13 @@ namespace BookStore
             {
                 using (var scope = app.Services.CreateScope())
                 {
-                    var context = scope.ServiceProvider.GetRequiredService<BloggingContext>();
+                    var context = scope.ServiceProvider.GetRequiredService<StudentManagementContext>();
                     context.Database.EnsureCreated();
                 }
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/User/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
@@ -41,7 +42,7 @@ namespace BookStore
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=User}/{action=Index}/{id?}");
 
             app.Run();
         }
