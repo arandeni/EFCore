@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using StudentManagement.Models;
 using System.Diagnostics;
 
@@ -30,10 +31,27 @@ namespace StudentManagement.Controllers
             return View();
         }
 
-      /*  public IActionResult CreateUser(string email, string password, string confirmPassword)
+        [HttpPost]
+        public IActionResult Create(string userEmail, string password)
         {
+            if (!ModelState.IsValid)
+            {
+                return NotFound();
+            }
+            else 
+            {
+                try
+                {
+                    _studentManagementContext.Users.Add(new User() { UserEmail = userEmail, Password = password, RoleId = 1});
+                    _studentManagementContext.SaveChanges();
+                }
+                catch (DbUpdateException) 
+                {
+                    throw;
+                }
+            }
             return View();
-        }*/
+        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
