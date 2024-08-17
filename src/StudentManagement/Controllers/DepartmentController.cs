@@ -15,7 +15,8 @@ namespace StudentManagement.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var departments = _studentManagementContext.Departments.ToList();
+            return View(departments);
         }
 
         public IActionResult Create() 

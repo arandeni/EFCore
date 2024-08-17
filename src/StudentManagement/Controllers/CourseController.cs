@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StudentManagement.Models;
+using StudentManagement.ViewModels;
 
 namespace StudentManagement.Controllers
 {
@@ -15,7 +16,25 @@ namespace StudentManagement.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            try
+            {
+                var courses = _studentManagementContext.Courses.ToList();
+                var departments = _studentManagementContext.Departments.ToList();
+                var coursesWithDepartments = from course in courses
+                                             join department in departments on course.DepartmentId equals department.Id
+                                             select new CourseViewModel
+                                             {
+                                                 Id = course.Id,
+                                                 CourseName = course.Name,
+                                                 DepartmentName = department.Name
+                                             };
+
+                return View(coursesWithDepartments);
+            }
+            catch (Exception) 
+            {
+                throw;
+            }
         }
 
         public IActionResult Create()
